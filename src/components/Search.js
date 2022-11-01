@@ -1,6 +1,14 @@
-import React from 'react'
+import React, {useEffect, useState } from 'react'
 
-function Search() {
+function Search({filterMovie}) {
+
+  const [entry, setEntry] = useState('')
+
+  useEffect(() => {
+
+    filterMovie(entry);
+    
+  }, [entry])
 
   return (
     <section className='layout-row justify-content-center mb-40'>
@@ -9,6 +17,9 @@ function Search() {
         placeholder='Search for movie by name' 
         className='w-75 py-2'
         data-testid='search'
+        onChange={(e) => {
+          setEntry(e.target.value)
+        }}
       />
     </section>
   )
