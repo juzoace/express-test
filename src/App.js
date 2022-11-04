@@ -4,6 +4,7 @@ import 'h8k-components'
 
 import { Movieform, Movieslist, Search } from './components'
 
+
 const title = 'Favorite Movie Directory'
 
 function App() {
@@ -14,40 +15,39 @@ function App() {
 
 
   const addMovie = (e) => {
-    setMovies([...movies, e]);
+    setMovies(   [...movies, e].sort((a, b) => {
+      return b._duration_.substring(0, e._duration_.indexOf(' ')) - a._duration_.substring(0, e._duration_.indexOf(' '));
+    })   );
     setMovieDataStore(true);
   }
 
   const filterMovie = (e) => {
     
-console.log(e.length );
-    // At least 2 words must  be inputed
-    if (e.length > 1) {
-// console.log('hey')  
-      // setMovies(
-     const result = movies.filter(
-          // (movie) => movie._name_.match(new RegExp(e, "i"))
-          (movie) => movie._name_.startsWith(e) 
-          )
-
-      console.log(result)
-      
-      if (result.length > 0 ) {
-        setMovies(result);
-
-      } else {
+    if (e.length >= 2 ) {
         
-        setNoMovieSearchResult(true);
-        setMovieDataStore(false);
+          const result = movies.filter(o =>
+            Object.keys(o).some(k => o[k].toLowerCase().includes(e.toLowerCase())));
 
-      }
+        // Result greater than 0
+          if (result.length > 0 ) {
+            setMovies(result);
 
-      // );
+          } 
 
-      // setNoMovieSearchResult(true);
+          // Result is zero
+          if (result.length == 0) {
+            
+            setNoMovieSearchResult(true);
+            setMovieDataStore(false);
 
+          } 
+        
+    } else {
+      setMovies(movies);
+      setMovieDataStore(true);
     }
-    
+
+   
   }
 
 

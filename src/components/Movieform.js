@@ -47,13 +47,19 @@ function Movieform( {addMovie} ) {
       const roundedOffVal = convertedVal.toFixed(1)
 
         addMovie(
-          {_name_: name, _rating_: rating, _duration_: `${roundedOffVal}h`}
+          // {_name_: name, _rating_: rating, _duration_: roundedOffVal}
+          {_name_: name, _rating_: rating, _duration_: roundedOffVal < 2 ? `${roundedOffVal} h`:  `${roundedOffVal} Hrs` }
         )
+
+          // Reset form value
+          setMovieRating(0);
+          setMovieDuration('');
+          setMovieName('');
 
       } else {
 
         addMovie(
-          {_name_: name, _rating_: rating, _duration_: duration}
+          {_name_: name, _rating_: rating, _duration_: duration.slice(0, lengthOfString - 1)  < 2 ?`${duration.slice(0, lengthOfString - 1)} h`: `${duration.slice(0, lengthOfString - 1)} Hrs` }
         )
 
         // Reset form value

@@ -6,7 +6,10 @@ function Search({filterMovie}) {
 
   useEffect(() => {
 
-    filterMovie(entry);
+    // if (entry.length >= 2) {
+      filterMovie(entry);
+    // }
+    
     
   }, [entry])
 
