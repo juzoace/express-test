@@ -48,8 +48,9 @@ function Movieform( {addMovie} ) {
 
         addMovie(
           // {_name_: name, _rating_: rating, _duration_: roundedOffVal}
-          {_name_: name, _rating_: rating, _duration_: roundedOffVal < 2 ? `${roundedOffVal} h`:  `${roundedOffVal} Hrs` }
-        )
+          {_name_: name, _rating_: rating, _duration_: roundedOffVal < 2 ? `${roundedOffVal}`:  `${roundedOffVal}` }
+          // {_name_: name, _rating_: rating, _duration_: `${roundedOffVal} Hrs`}
+          )
 
           // Reset form value
           setMovieRating(0);
@@ -57,9 +58,9 @@ function Movieform( {addMovie} ) {
           setMovieName('');
 
       } else {
-
+        console.log(duration);
         addMovie(
-          {_name_: name, _rating_: rating, _duration_: duration.slice(0, lengthOfString - 1)  < 2 ?`${duration.slice(0, lengthOfString - 1)} h`: `${duration.slice(0, lengthOfString - 1)} Hrs` }
+          {_name_: name, _rating_: rating, _duration_: duration.slice(0, lengthOfString - 1)  < 2 ?`${duration.slice(0, lengthOfString - 1)}`: `${duration.slice(0, lengthOfString - 1)}` }
         )
 
         // Reset form value

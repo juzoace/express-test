@@ -23,11 +23,12 @@ function App() {
 
   const filterMovie = (e) => {
     
-    if (e.length >= 2 ) {
+    if (Number(e.length) >= 2 ) {
         
           const result = movies.filter(o =>
-            Object.keys(o).some(k => o[k].toLowerCase().includes(e.toLowerCase())));
-
+            Object.keys(o).some(k => o[k].toLowerCase().includes(e.toLowerCase()))
+            );
+          console.log(result);
         // Result greater than 0
           if (result.length > 0 ) {
             setMovies(result);

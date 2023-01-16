@@ -67,19 +67,18 @@ describe('Favorite Movie Directory', () => {
         addMovie('Star Wars', '95', '3h')
         list = getByTestId(TEST_IDS.listId)
         await waitFor(() => {
-            expect(list.children[0].textContent).toEqual('Star Wars 95 3 Hrs') // I changed this
+            // expect(list.children[0].textContent).toEqual('Star Wars 95 3 Hrs')
+            expect(list.children[0].textContent).toEqual('Star WarsRatings: 95/1003 Hrs') // I changed this
             expect(queryNoResult).toBeNull()
         })
     })
-
-
-    // Passed
+    // 3 - Passed
     it('should not add the row if name or ratings or duration is empty', async () => {
         addMovie('The Platform', '40', '1.5h')
         list = getByTestId(TEST_IDS.listId)
        
         await waitFor(() => {
-            expect(list.children[0].textContent).toEqual('The Platform 40 1.5 h')
+            expect(list.children[0].textContent).toEqual('The PlatformRatings: 40/1001.5 Hrs')
         })
         addMovie('', '90', '1.5h')
         addMovie('The Irishman', '', '2.2h')
@@ -101,8 +100,8 @@ describe('Favorite Movie Directory', () => {
         addMovie('Antman', '99', '2h')
         await waitFor(() => {
             list = getByTestId(TEST_IDS.listId)
-            //expect(list.children[0].textContent).toEqual('AntmanRatings: 99/1002 Hrs')
-            expect(list.children[0].textContent).toEqual('Antman 99 2 Hrs') // changed this
+            expect(list.children[0].textContent).toEqual('AntmanRatings: 99/1002 Hrs')
+            // expect(list.children[0].textContent).toEqual('Antman 99 2 Hrs') // changed this
         })
         addMovie('Harry Potter', '100', '3w')
         await waitFor(() => {
@@ -130,7 +129,7 @@ describe('Favorite Movie Directory', () => {
             expect(queryAlert).toBeNull()
         })
     })
-    // 8 - Pending
+    // 8 - Pending - Looks fishy
     it('should add multiple rows in sorted order', async () => {
         addMoviesSet()
         await waitFor(() => {
@@ -141,7 +140,7 @@ describe('Favorite Movie Directory', () => {
             expect(list.children[3].textContent).toContain("1.5 Hrs")
         })
     })
-    // 9 - Pending
+    // 9 - Pending - Looks fishy
     it('should start search when at least 2 characters are entered', async () => {
         addMoviesSet()
         fireEvent.change(search, { target: { value: 'g' } })
@@ -159,8 +158,6 @@ describe('Favorite Movie Directory', () => {
     })
     // 10 - Pending
     it('should filter movies by starting characters', async () => {
-        
-        
         addMoviesSet()
         fireEvent.change(search, { target: { value: 'no' } })
         await waitFor(() => {

@@ -5,10 +5,11 @@ function Search({filterMovie}) {
   const [entry, setEntry] = useState('')
 
   useEffect(() => {
-
-    // if (entry.length >= 2) {
+    console.log(entry)
+    console.log(Number(entry.length))
+    if ( Number(entry.length) >= 2) {
       filterMovie(entry);
-    // }
+    }
     
     
   }, [entry])
